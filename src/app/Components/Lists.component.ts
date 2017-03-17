@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
 import {Store} from "@ngrx/store";
 import {State} from "../reducers";
 import {AddListAction, DeleteListAction} from "../actions/lists";
@@ -8,15 +8,16 @@ import {Observable} from "rxjs";
 @Component({
   selector:'lists',
   template:`
-    <div>
-      <input placeholder="Enter List Name" [value]="listName" #nameRef (keyup.enter)="addList($event);nameRef.value=null"/>
-    </div>
-    <div>
+    <div *ngIf="lists">
         <ul>
-          <li *ngFor="let list of lists$ | async" >
+          <li *ngFor="let list of lists" >
               <div>
-                {{list.name}}
+                <div *ngIf="!showUpdatingList(list)" >{{list.name}}</div>
+                <div *ngIf="showUpdatingList(list)" >
+                  <input [value]="list.name" (keyup.enter)="updateList($event)"/>
+                 </div>
                 <span (click)="removeList(list)" >X</span>
+                <span (click)="setListForUpdate(list)" >U</span>
               </div>
           </li>
         
@@ -24,10 +25,23 @@ import {Observable} from "rxjs";
     </div>
   `
 })
-export class ListsComponent implements OnInit{
+export class ListsComponent{
 
-  private lists$:Observable<List[]>;
-  private listName:string=null;
+
+  @Input()
+  private lists:List[];
+
+  @Input()
+  private UpdatingList:List;
+
+  @Output()
+  private onListRemoveClicked:EventEmitter<number>=new EventEmitter();
+
+  @Output()
+  private onListUpdateClicked:EventEmitter<List>=new EventEmitter();
+
+  @Output()
+  private onListUpdated:EventEmitter<List>=new EventEmitter();
 
 
   constructor(private store:Store<State>){
@@ -35,21 +49,25 @@ export class ListsComponent implements OnInit{
 
   }
 
-  ngOnInit(){
-    this.lists$ = this.store
-      .map((state)=>state.lists);
-
-  }
-
-  addList(event){
-    let listName = event.target.value;
-    let randomId = Math.floor(Math.random() * 10000)
-    this.store.dispatch(new AddListAction(new List(randomId,listName)));
-
+  showUpdatingList(list:List){
+     return this.UpdatingList && list.id==this.UpdatingList.id;
   }
 
   removeList(list){
-    this.store.dispatch(new DeleteListAction(list.id));
+    this.onListRemoveClicked.emit(list.id);
+
+  }
+
+  setListForUpdate(list:List){
+    this.onListUpdateClicked.emit(list);
+  }
+
+  updateList(event){
+    if(event.target.value){
+      this.UpdatingList.name = event.target.value;
+      this.onListUpdated.emit(this.UpdatingList);
+    }
+
   }
 
 }

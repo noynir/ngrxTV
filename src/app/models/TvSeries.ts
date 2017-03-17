@@ -15,3 +15,4 @@ export interface TvSeries{
   original_name:string;
 
 }
+

@@ -1,9 +1,10 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
-import {ListsComponent} from "./Components/Lists.component";
+import {ListsContainerComponent} from "./Containers/ListsContainer.component";
+import {SeriesContainerComponent} from "./Containers/seriesContainer.component";
 
 const routes:Routes=[
-  {path:'', component:ListsComponent}
+  {path:'', component:SeriesContainerComponent}
 ];
 
 @NgModule({
