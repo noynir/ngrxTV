@@ -1,6 +1,6 @@
 import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
 import {Store} from "@ngrx/store";
-import {State} from "../reducers";
+import {AppState} from "../reducers";
 import {AddListAction, DeleteListAction} from "../actions/lists";
 import {List} from "../models/List";
 import {Observable} from "rxjs";
@@ -44,7 +44,7 @@ export class ListsComponent{
   private onListUpdated:EventEmitter<List>=new EventEmitter();
 
 
-  constructor(private store:Store<State>){
+  constructor(private store:Store<AppState>){
 
 
   }

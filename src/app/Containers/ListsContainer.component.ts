@@ -2,7 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {Store} from "@ngrx/store";
 import {AddListAction, DeleteListAction, SetUpdateListAction, UpdateListAction} from "../actions/lists";
 import {List} from "../models/List";
-import {State} from "../reducers/index";
+import {AppState} from "../reducers/index";
 import {Observable} from "rxjs";
 import {ListState} from "../reducers/list";
 @Component({
@@ -47,7 +47,7 @@ export class ListsContainerComponent implements OnInit{
 
     private updatingList$:Observable<List>;
 
-    constructor(private store:Store<State>){
+    constructor(private store:Store<AppState>){
 
     }
 

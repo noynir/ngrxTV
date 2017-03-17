@@ -8,18 +8,28 @@ import {reducer} from "./reducers";
 import {AppRouting} from "./app.routing";
 import {ListsModule} from "./modules/lists.module";
 import {SeriesModule} from "./modules/Series.module";
-import { AngularFireModule } from 'angularfire2';
+import {AngularFireModule, AuthProviders, AuthMethods, FirebaseAppConfig} from 'angularfire2';
 import {environment} from "../environments/environment";
-import {ImageUrlPipe} from "./Pipes/imageUrl.pipe";
 import {ImageService} from "./services/image.service";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
+import {AuthService} from "./services/auth.service";
+import {LoginModule} from "./login/login.module";
+import {EffectsModule} from "@ngrx/effects";
+import {LoginEffects} from "./Effects/login-effects";
+
 
 // Must export the config
-export const firebaseConfig = {
+export const firebaseConfig:FirebaseAppConfig = {
   apiKey: 'AIzaSyBq0YR5fSixiI40Qjyi92ffWgVStFxGNNw',
   authDomain:environment.production ? 'http://ngrxtv.firebaseapp.com' : 'http://localhost',
+  databaseURL: 'https://ngrxtv.firebaseio.com/',
+  storageBucket:'gs://ngrxtv.appspot.com/'
 
-    databaseURL: 'https://ngrxtv.firebaseio.com/',
+};
+
+const myFirebaseAuthConfig = {
+  provider: AuthProviders.Password,
+  method: AuthMethods.Password
 };
 
 @NgModule({
@@ -29,17 +39,18 @@ export const firebaseConfig = {
   imports: [
     BrowserModule,
     HttpModule,
-    AppRouting,
     ListsModule,
+    AngularFireModule.initializeApp(firebaseConfig,myFirebaseAuthConfig),
     SeriesModule,
-    AngularFireModule.initializeApp(firebaseConfig),
     StoreModule.provideStore(reducer),
+    EffectsModule.run(LoginEffects),
     // Note that you must instrument after importing StoreModule
     StoreDevtoolsModule.instrumentOnlyWithExtension({
       maxAge: 5
-    })
+    }),
+    AppRouting
   ],
-  providers: [ImageService],
+  providers: [ImageService,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

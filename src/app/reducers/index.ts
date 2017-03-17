@@ -2,12 +2,12 @@ import {combineReducers} from "@ngrx/store";
 import * as fromLists from "./list";
 import * as fromSeries from "./series";
 
-export interface State {
+export interface AppState {
   currentLists:fromLists.ListState,
   currentSeries:fromSeries.SeriesState
 }
 
-const initialState: State = {
+const initialState: AppState = {
   currentLists:fromLists.initialState,
   currentSeries:fromSeries.initialState
 }
@@ -25,7 +25,7 @@ export function reducer(state:any, action:any){
 
 
 //
-// export function reducer(state = initialState, action: Action):State{
+// export function reducer(state = initialState, action: Action):AppState{
 //
 //     switch (action.type){
 //
