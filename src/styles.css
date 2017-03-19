@@ -8,3 +8,10 @@ ul{
 .padTop-main{
  padding-top: 5rem;
 }
+
+a{
+  text-decoration: none;
+}
+a:hover{
+  text-decoration: underline;
+}

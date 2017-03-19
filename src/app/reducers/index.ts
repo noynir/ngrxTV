@@ -1,22 +1,28 @@
 import {combineReducers} from "@ngrx/store";
-import * as fromLists from "./list";
+import * as fromLists from "./watchlist";
 import * as fromSeries from "./series";
+import * as fromAuth from "./auth";
+
 
 export interface AppState {
-  currentLists:fromLists.ListState,
-  currentSeries:fromSeries.SeriesState
+  watchList:fromLists.WatchListState,
+  currentSeries:fromSeries.SeriesState,
+  auth:fromAuth.AuthState
 }
 
 const initialState: AppState = {
-  currentLists:fromLists.initialState,
+  auth:fromAuth.initialState,
+  watchList:fromLists.initialState,
   currentSeries:fromSeries.initialState
 }
 
 const reducers={
-  currentLists:fromLists.reducer,
+  auth:fromAuth.reducer,
+  watchList:fromLists.reducer,
   currentSeries:fromSeries.reducer
 }
 
+// const combinedReducers = compose(localStorageSync(['auth'],true),combineReducers)(reducers);
 const combinedReducers = combineReducers(reducers);
 
 export function reducer(state:any, action:any){

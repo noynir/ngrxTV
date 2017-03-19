@@ -1,6 +1,6 @@
 import {Pipe, PipeTransform} from "@angular/core";
-import {ImageType} from "../models/ImageType";
-import {ImageService} from "../services/image.service";
+import {ImageType} from "../../models/ImageType";
+import {ImageService} from "../../services/image.service";
 
 @Pipe({name:'imageUrl'})
 export class ImageUrlPipe implements PipeTransform{

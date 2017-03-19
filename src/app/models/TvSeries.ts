@@ -13,6 +13,7 @@ export interface TvSeries{
   vote_count:number;
   name:string;
   original_name:string;
+  $key?:string
 
 }
 
