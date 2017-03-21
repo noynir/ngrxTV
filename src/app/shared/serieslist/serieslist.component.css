@@ -1,0 +1,8 @@
+div.list-container{
+   padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+div.list-container .list-item{
+   margin: 0.5rem;
+}

@@ -1,0 +1,5 @@
+<app-series-view [series]="series$ | async"
+                 [inWatchList]="isInWatchList$ | async"
+                 (onAddClicked)="onAddRemove($event,true)"
+                 (onRemoveClicked)="onAddRemove($event,false)">
+</app-series-view>

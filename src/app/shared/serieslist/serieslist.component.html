@@ -1,0 +1,9 @@
+<div>
+  <div class="list-container">
+    <div class="list-item" *ngFor="let seriesItem of series" (click)="onSeriesClicked.emit(seriesItem)" >
+      <!--{{seriesItem.name}}-->
+        <img [src]="seriesItem.poster_path | imageUrl"  />
+
+    </div>
+  </div>
+</div>
