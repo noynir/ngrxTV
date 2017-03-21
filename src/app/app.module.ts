@@ -20,7 +20,6 @@ import {SeriesEffects} from "./Effects/series-effects.service";
 import {SeriesModule} from "./series/series.module";
 import {WatchlistModule} from "./watchlist/watchlist.module";
 import {WatchlistEffects} from "./Effects/watchlist-effects.service";
-import { MainViewContainerComponent } from './main-view-container/main-view-container.component';
 import {MaterialModule} from "@angular/material";
 import {MainviewModule} from "./mainview/mainview.module";
 // import {EffectsModule} from "@ngrx/effects";
