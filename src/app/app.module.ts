@@ -22,7 +22,8 @@ import {MainviewModule} from "./mainview/mainview.module";
     HttpModule,
     AppRouting,
     CoreModule,
-    MainviewModule
+    MainviewModule,
+    StoreModule.provideStore(reducer)
   ],
 
   bootstrap: [AppComponent]
