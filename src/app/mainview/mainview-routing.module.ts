@@ -7,7 +7,7 @@ import {SeriesViewContainerComponent} from "../series/series-view-container/seri
 import {WatchlistContainerComponent} from "../watchlist/watchlist-container/watchlist-container.component";
 
 const routes: Routes = [
-  { path:'main',component:MainViewContainerComponent, canActivate:[InitialAuthGuard],
+  { path:'main',component:MainViewContainerComponent,
     children:[
       {path:'', redirectTo:'series',pathMatch:'full'},
       { path:'series', component:SeriesContainerComponent },

@@ -11,6 +11,6 @@ import {InitialAuthGuard} from "./services/intialAuth.guard";
   imports: [
     CommonModule
   ],
-  providers: [TvdbService,WatchlistService,AuthService,ImageService,InitialAuthGuard]
+  providers: [TvdbService,WatchlistService,ImageService]
 })
 export class CoreModule { }

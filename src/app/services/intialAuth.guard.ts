@@ -10,7 +10,7 @@ import {User} from "../models/user";
 @Injectable()
 export class InitialAuthGuard implements CanActivate {
 
-  constructor(private store$:Store<AppState>,private auth:AuthService,private router:Router){}
+  constructor(private store$:Store<AppState>,private router:Router){}
 
   canActivate(
     next: ActivatedRouteSnapshot,
