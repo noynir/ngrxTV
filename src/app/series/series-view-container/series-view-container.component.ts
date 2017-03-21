@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {AppState} from "../../reducers/index";
 import {Store} from "@ngrx/store";
 import {ActivatedRoute} from "@angular/router";
-import {SelectSeries} from "../../actions/series";
 import {Observable} from "rxjs";
 import {TvSeries} from "../../models/TvSeries";
 import * as watchList from "../../actions/watchlist";
