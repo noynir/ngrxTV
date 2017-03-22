@@ -33,7 +33,16 @@ export class SeriesViewContainerComponent implements OnInit {
      this.series$=this.store$.select((state)=>state.currentSeries.selectedSeries);
 
 
-
+    this.isInWatchList$=this.store$.select((state)=>{
+      let inx =-1;
+      if(state.currentSeries && state.currentSeries.selectedSeries){
+        let id = state.currentSeries.selectedSeries.id;
+        if(state.watchList &&  state.watchList.list){
+          inx=state.watchList.list.findIndex((series)=>series.id == id)
+        }
+      }
+      return inx >=0;
+    });
 
 
   }

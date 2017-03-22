@@ -1,6 +1,6 @@
 import {List} from "../models/List";
 import *  as ListActions from "../actions/watchlist"
-import {Action} from "@ngrx/store";
+import {Action, State} from "@ngrx/store";
 import {TvSeries} from "../models/TvSeries";
 
 export interface WatchListState {
@@ -29,6 +29,7 @@ export function reducer(state = initialState, action: Action):WatchListState{
     }
   }
 }
+
 
 
 

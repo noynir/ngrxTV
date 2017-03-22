@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {AppState} from "../../reducers/index";
 import {Store} from "@ngrx/store";
 import {LoadSeries} from "../../actions/series";
+import * as fromSeries from "../../reducers/series";
 @Component({
   selector:'series',
   template:`
@@ -26,7 +27,7 @@ export class SeriesContainerComponent implements OnInit{
 
     this.store$.dispatch(new LoadSeries());
 
-    this.series$ = this.store$.select((state)=> state.currentSeries.series);
+    this.series$ = this.store$.select(fromSeries.getSeriesList);
   }
 
 

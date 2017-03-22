@@ -4,6 +4,9 @@ import {TV_SERIES} from "../data/tvSeries";
 import {Action} from "@ngrx/store";
 import * as Series from '../actions/series' ;
 import {TvSeriesResponse} from "../models/tv-series-response";
+import {AppState} from "./index";
+import {createSelector} from 'reselect';
+import * as fromSeries from './series';
 
 export interface SeriesState{
   series:TvSeries[],
@@ -31,5 +34,12 @@ export function reducer(state = initialState, action:Action) : SeriesState {
       return state;
   }
 }
+
+
+
+export const getSeriesState = (state: AppState) => state.currentSeries;
+
+export const getSeriesList = createSelector(getSeriesState, (seriesState:SeriesState)=> seriesState.series);
+
 
 
