@@ -26,7 +26,7 @@ export class SeriesContainerComponent implements OnInit{
 
     this.store$.dispatch(new LoadSeries());
 
-    this.series$ = this.store$.select((state)=> state.currentSeries);
+    this.series$ = this.store$.select((state)=> state.currentSeries.series);
   }
 
 

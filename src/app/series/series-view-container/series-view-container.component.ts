@@ -29,7 +29,9 @@ export class SeriesViewContainerComponent implements OnInit {
         }
       });
 
-     this.series$=this.store$.select((state)=>state.selectedSeries)
+
+     this.series$=this.store$.select((state)=>state.currentSeries.selectedSeries);
+
 
 
 

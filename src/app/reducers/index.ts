@@ -1,36 +1,30 @@
-
-
 import {TvSeries} from "../models/TvSeries";
-import {Action} from "@ngrx/store";
-import * as Series from '../actions/series';
+import {Action, combineReducers} from "@ngrx/store";
+import * as fromSeries from '../reducers/series';
+import * as fromWatchList from '../reducers/watchlist';
 import {TV_SERIES} from "../data/tvSeries";
+import {SeriesState} from "./series";
+import {WatchListState} from "./watchlist";
 
 export interface AppState{
-  currentSeries:TvSeries[],
-  selectedSeries:TvSeries
+  currentSeries:SeriesState,
+  watchList:WatchListState
 }
 
 const intialState:AppState={
-  currentSeries:[],
-  selectedSeries:null
+  currentSeries:fromSeries.initialState,
+  watchList:fromWatchList.initialState
 }
+
+const reducers={
+  currentSeries:fromSeries.reducer,
+  watchList:fromWatchList.reducer
+}
+const combinedReducers = combineReducers(reducers);
 
 export function reducer(state=intialState,action:Action): AppState{
 
-  switch (action.type){
-    case Series.ActionTypes.LOAD_SERIES:
-      return Object.assign({},state,{ currentSeries:TV_SERIES });
-    case Series.ActionTypes.SELECT_SERIES:
-      let seriesId= action.payload;
-      if(state.currentSeries){
-          let series= state.currentSeries.find((series)=> series.id == seriesId);
-          return Object.assign({},state,{selectedSeries: series});
-      }
-      return state;
-    default:
-      return state;
-
-  }
+    return combinedReducers(state,action);
 
 }
 

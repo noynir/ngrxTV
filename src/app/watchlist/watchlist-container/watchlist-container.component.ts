@@ -14,16 +14,19 @@ import {Router} from "@angular/router";
 export class WatchlistContainerComponent implements OnInit {
 
   private watchList$:Observable<TvSeries[]>
-  constructor() { }
+  constructor(private router:Router,private store$:Store<AppState>) { }
 
   ngOnInit() {
 
+    this.store$.dispatch(new watchList.WatchListLoadAction());
+
+     this.watchList$ = this.store$.select((state)=>state.watchList.list);
 
 
   }
 
   seriesClicked(series){
-
+    this.router.navigate(['/main/series',series.id]);
   }
 
 }

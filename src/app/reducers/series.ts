@@ -6,27 +6,30 @@ import * as Series from '../actions/series' ;
 import {TvSeriesResponse} from "../models/tv-series-response";
 
 export interface SeriesState{
-  series:TvSeriesResponse,
+  series:TvSeries[],
   selectedSeries:TvSeries
 }
 
 export const initialState:SeriesState={
-  series:null,
+  series:[],
   selectedSeries:null
 }
 
-export function reducer(state = initialState, action:Action) : SeriesState{
+export function reducer(state = initialState, action:Action) : SeriesState {
 
-  switch (action.type){
-    case Series.ActionTypes.SERIES_LOADED:{
-      return Object.assign({},state,{series:action.payload});
-    }
-    case Series.ActionTypes.SERIES_SELECTED_LOADED:{
-      return Object.assign({},state,{selectedSeries:action.payload});
-    }
-
+  switch (action.type) {
+    case Series.ActionTypes.LOAD_SERIES:
+      return Object.assign({}, state, {series: TV_SERIES});
+    case Series.ActionTypes.SELECT_SERIES:
+      let seriesId = action.payload;
+      if (state.series) {
+        let series = state.series.find((series) => series.id == seriesId);
+        return Object.assign({}, state, {selectedSeries: series});
+      }
+      return state;
+    default:
+      return state;
   }
 }
-
 
 
